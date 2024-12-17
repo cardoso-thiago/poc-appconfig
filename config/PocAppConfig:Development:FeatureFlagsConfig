@@ -1,0 +1,17 @@
+{
+    "key_1": {
+        "enabled": true,
+        "type": "configuration",
+        "value": "test1"
+    },
+    "key_2": {
+        "enabled": true,
+        "type": "configuration",
+        "value": "test2"
+    },
+    "key_3": {
+        "enabled": false,
+        "type": "configuration",
+        "value": "test3"
+    }
+}

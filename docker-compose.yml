@@ -1,0 +1,27 @@
+services:
+  appconfig-agent:
+    image: public.ecr.aws/aws-appconfig/aws-appconfig-agent:2.0.12658
+    container_name: appconfig-agent
+    ports:
+      - "2772:2772"
+    volumes:
+      - ./config:/config
+    command: [
+      "--local_development_directory", "/config",
+      "--http-port", "2772",
+      "--poll_interval", "5"
+    ]
+    restart: always
+
+  poc-appconfig:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: poc-appconfig
+    environment:
+      - APP_CONFIG_URL=http://appconfig-agent:2772/applications/PocAppConfig/environments/Development/configurations/
+    depends_on:
+      - appconfig-agent
+    ports:
+      - "8080:8080"
+    restart: always
